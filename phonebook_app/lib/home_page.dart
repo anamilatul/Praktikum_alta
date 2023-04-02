@@ -31,46 +31,49 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('Phone Book App'),
       ),
-      body: Form(
-          key: formKey,
-          child: Column(
-            children: [
-              TextField(
-                controller: nameController,
-                onChanged: (String value) {
-                  name = value;
-                },
-              ),
-              TextField(
-                controller: phoneController,
-                onChanged: (String value) {
-                  phoneNumber = value;
-                },
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (!formKey.currentState!.validate()) return;
+      body: Container(
+        margin: EdgeInsets.all(20),
+        child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                TextField(
+                  controller: nameController,
+                  onChanged: (String value) {
+                    name = value;
+                  },
+                ),
+                TextField(
+                  controller: phoneController,
+                  onChanged: (String value) {
+                    phoneNumber = value;
+                  },
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (!formKey.currentState!.validate()) return;
 
-                  formKey.currentState!.save();
-                  contactProvider.add(GetContact(
-                    name: name,
-                    phoneNumber: phoneNumber,
-                  ));
-                },
-                child: Text('Add Number'),
-              ),
-              Expanded(
-                  child: ListView.builder(
-                      itemCount: contactProvider.contacts.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(contactProvider.contacts[index].name),
-                          subtitle:
-                              Text(contactProvider.contacts[index].phoneNumber),
-                        );
-                      }))
-            ],
-          )),
+                    formKey.currentState!.save();
+                    contactProvider.add(GetContact(
+                      name: name,
+                      phoneNumber: phoneNumber,
+                    ));
+                  },
+                  child: Text('Add Contact'),
+                ),
+                Expanded(
+                    child: ListView.builder(
+                        itemCount: contactProvider.contacts.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text(contactProvider.contacts[index].name),
+                            subtitle: Text(
+                                contactProvider.contacts[index].phoneNumber),
+                          );
+                        }))
+              ],
+            )),
+      ),
     );
   }
 }
