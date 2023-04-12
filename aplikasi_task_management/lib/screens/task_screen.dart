@@ -31,9 +31,9 @@ class TaskScreen extends StatelessWidget {
                     ),
                   ),
                   context: context,
-                  builder: (context) => ProfileSheet());
+                  builder: (context) => const ProfileSheet());
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.account_circle,
             ),
           )
